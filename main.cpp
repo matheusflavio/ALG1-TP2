@@ -31,8 +31,8 @@ int main() {
 
     /* Definição de variáveis auxiliares que indicam os índices a ser processados e execução da função
     que calcula o subArray de maior soma*/
-    int left = 0, right = rockAmount - 1;
-    rocks->maxSubArraySum(rockRates, left, right);
+    int startShow = 0, endShow = rockAmount - 1;
+    rocks->maxSubArraySum(rockRates, startShow, endShow);
 
     /* Loop for utilizado para verificar porque está dando erro no small_input.txt*/
     /*for (auto i : rockRates)
