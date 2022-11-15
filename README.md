@@ -1,7 +1,7 @@
 # ALG1-TP2
 Repository to save my ALG1-TP2 Implementation.
 This implementation works using really little time and is 100% accurate to stock and extra test-cases.
-It's the second functional implementation. The first one was using struct, and this one is using POO.
+It's the forth functional implementation. The first one was using dynamic programming, the second one was too slow, and, after that, I've used struct, and this one is using POO.
 
 ## Compiling and Running the Program
 First of all, clone this repo into a folder of your preference inside your machine by opening a terminal inside that folder and than enter the project folder by running these commands:
@@ -11,7 +11,7 @@ cd ALG1-TP2
 ```
 Then, build the tp02 executable. To do that, use the terminal that previously is located inside the project root folder and run the command:
 ```
-make
+makethird
 ```
 After that, run a test instance by using a command like this:
 ```
