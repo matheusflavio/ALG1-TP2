@@ -1,25 +1,33 @@
-CC = g++
-CXXFLAGS = -std=c++11 -g -Wall
+CC=gcc
+CXX=g++
+RM=rm -f
+CPPFLAGS=-g -Wall
+LDFLAGS=-g
+LDLIBS=
 
-INCLUDE_FOLDER = ./include/
-OBJ_FOLDER = ./obj/
-SRC_FOLDER = ./src/
+SRCS=main.cpp rock.cpp
+OBJS=$(subst .cpp,.o,$(SRCS))
 
-MAIN = main
-TARGET = tp01
-SRC = $(wildcard $(SRC_FOLDER)*.cpp)
-OBJ = $(patsubst $(SRC_FOLDER)%.cpp, $(OBJ_FOLDER)%.o, $(SRC))
+all: tp02
 
-$(OBJ_FOLDER)%.o: $(SRC_FOLDER)%.cpp
-	$(CC) $(CXXFLAGS) -c $< -o $@ -I$(INCLUDE_FOLDER)
+tp02: $(OBJS)
+	$(CXX) $(LDFLAGS) -o tp02 $(OBJS) $(LDLIBS)
 
-all: $(OBJ)
-	$(CC) $(CXXFLAGS) -o $(TARGET) $(OBJ)
+depend: .depend
+
+.depend: $(SRCS)
+	$(RM) ./.depend
+	$(CXX) $(CPPFLAGS) -MM $^>>./.depend;
 
 clean:
-	@rm -rf $(OBJ_FOLDER)* $(TARGET)
+	$(RM) $(OBJS) tp02
+
+distclean: clean
+	$(RM) *~ .depend tp02
 
 commit:
 	git add .
 	git commit -m "$$ARGS"
 	git push
+
+include .depend
