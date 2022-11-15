@@ -18,7 +18,7 @@ int main() {
     /* Vetor de ponto flutuante para armazenar a soma atribuída a cada show e struct que 
     armazena os shows de entrada(left) e saída(right) dos amigos, além da soma das notas(sum)*/
     vector<float>rockRates(rockAmount, 0);
-    struct rock rocks = { 0, 0, getINT_MIN()};
+    Rock *rocks = new Rock();
 
     /*Loop que itera adquirindo a nota de cada amigo para cada show e soma o valor
     atual atribuído pelo amigo atual ao devido show votado*/
@@ -32,14 +32,15 @@ int main() {
     /* Definição de variáveis auxiliares que indicam os índices a ser processados e execução da função
     que calcula o subArray de maior soma*/
     int left = 0, right = rockAmount - 1;
-    maxSubArraySum(rockRates, left, right, rocks);
+    rocks->maxSubArraySum(rockRates, left, right);
 
+    /* Loop for utilizado para verificar porque está dando erro no small_input.txt*/
     /*for (auto i : rockRates)
       cout << i << " ";
     cout << endl;*/
 
     /* Impressão na tela dos shows de entrada e saída dos amigos*/
-    cout << rocks.left + 1 << " " << rocks.right + 1<< endl;
+    cout << rocks->getStartShow() + 1 << " " << rocks->getEndShow() + 1<< endl;
 
     cin >> friendAmount >> rockAmount;
   }

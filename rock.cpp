@@ -7,17 +7,43 @@ float INT_MIN = -2147483647;
 
 float getINT_MIN() { return INT_MIN; }
 
+Rock::Rock() {
+  this->startShow = 0;
+  this->endShow = 0;
+  this->sum = getINT_MIN();
+}
+
+int Rock::getStartShow() {
+  return startShow;
+}
+
+void Rock::setStartShow(int value) {
+  this->startShow = value;
+}
+
+int Rock::getEndShow() {
+  return endShow;
+}
+
+void Rock::setEndShow(int value) {
+  this->endShow = value;
+}
+
+float Rock::getSum() {
+  return sum;
+}
+
+void Rock::setSum(float value) {
+  this->sum = value;
+}
+
 float maxOf3Floats(float num1, float num2, float num3) {
   float aux = (num1 > num2) ? num1 : num2;
   return (aux > num3) ? aux : num3;
 }
 
-rock getMaxRocks(rock leftRocks, rock middleRocks, rock rightRocks) {
-  struct rock aux = (leftRocks.sum > middleRocks.sum) ? leftRocks : middleRocks;
-  return (aux.sum > rightRocks.sum) ? aux : rightRocks; 
-}
-
-float max3PartedSum(vector<float> &rockRates, int left, int middle, int right, struct rock &rocks) {
+float Rock::max3PartedSum(vector<float> &rockRates, int left, int middle, int right) {
+  /* Definição de valores auxiliares e bases para execução dos procedimentos*/
   float leftSum = INT_MIN, rightSum = INT_MIN, middleSum = INT_MIN, sum = 0;
   int leftIndex = middle, rightIndex = middle;
 
@@ -39,34 +65,41 @@ float max3PartedSum(vector<float> &rockRates, int left, int middle, int right, s
     }
   }
 
-  /* Soma da partição correspondente ao vetor completo que correspionde à soma de leftSum + rightSum.
-  É feito a subtração de rockRate[middle], por foi somada duas vezes*/
+  /* Soma da partição correspondente ao vetor completo que correspionde à soma de
+  leftSum + rightSum. É feito a subtração de rockRate[middle], por foi somada duas vezes*/
   middleSum = leftSum + rightSum - rockRates[middle];
 
+  /* Definição do maior valor da soma dentre as 3 partições*/
   float maxSum = maxOf3Floats(leftSum, middleSum, rightSum);
 
-  if(maxSum >=rocks.sum ) {
-    rocks = { leftIndex, rightIndex, maxSum };
+  /* Atualização dos valores de entrada, saída e a soma correspondente*/
+  if(maxSum >=this->getSum() ) {
+    this->setStartShow(leftIndex);
+    this->setEndShow(rightIndex);
+    this->setSum(maxSum);
   }
 
   return maxSum;
 }
 
-float maxSubArraySum(vector<float> &rockRates, int left, int right, struct rock &rocks) {
-  /* Caso em que a entrada dos amigos é depois da saída, o que é impossível*/
+float Rock::maxSubArraySum(vector<float> &rockRates, int left, int right) {
+  /* Caso em que a entrada dos amigos é depois da saída, o que é impossível, de modo
+  a retornar o valor INT_MIN como soma para essa situação impossível*/
   if(left > right) {
     return INT_MIN;
   }
  
-  /* Valor médio para triparticionar o array de shows*/
+  /* Valor médio para triparticionar o array de shows a fim de realizar a comparação
+  das somas das notas dos intervalos*/
   int middle = (left + right)/2;
 
-  /* Criação de structs para a partição esquerda, mediana e direita para analisar qual possui
-  o subarray de maior soma*/
-  float leftRocks = maxSubArraySum(rockRates, left, middle - 1, rocks);
-  float middleRocks = max3PartedSum(rockRates, left, middle, right, rocks);
-  float rightRocks = maxSubArraySum(rockRates, middle + 1, right, rocks);
+  /* Criação de structs para a partição esquerda, mediana e direita para analisar
+  qual possui o subarray de maior soma*/
+  float leftRocks = maxSubArraySum(rockRates, left, middle - 1);
+  float middleRocks = max3PartedSum(rockRates, left, middle, right);
+  float rightRocks = maxSubArraySum(rockRates, middle + 1, right);
 
+  /* Definição do valor máximo da soma para o subproblema atual*/
   float maxValue = maxOf3Floats(leftRocks, middleRocks, rightRocks);
 
   return maxValue;
