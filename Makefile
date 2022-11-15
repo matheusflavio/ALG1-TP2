@@ -20,10 +20,10 @@ depend: .depend
 	$(CXX) $(CPPFLAGS) -MM $^>>./.depend;
 
 clean:
-	$(RM) $(OBJS) tp02
+	$(RM) $(OBJS) tp02 *.out
 
 distclean: clean
-	$(RM) *~ .depend tp02
+	$(RM) *~ .depend tp02 
 
 commit:
 	git add .
