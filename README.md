@@ -12,7 +12,7 @@ cd ALG1-TP2
 ```
 Then, build the tp02 executable. To do that, use the terminal that previously is located inside the project root folder and run the command:
 ```
-makethird
+make
 ```
 After that, run a test instance by using a command like this:
 ```
