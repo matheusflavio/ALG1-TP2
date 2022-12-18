@@ -2,6 +2,7 @@
 Repository to save my ALG1-TP2 Implementation.
 This implementation works using really little time and is 100% accurate to stock and extra test-cases.
 It's the forth functional implementation. The first one was using dynamic programming, the second one was too slow, and, after that, I've used struct, and this one is using POO.
+100% of the grade acquired.
 
 ## Compiling and Running the Program
 First of all, clone this repo into a folder of your preference inside your machine by opening a terminal inside that folder and than enter the project folder by running these commands:
