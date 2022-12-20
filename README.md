@@ -29,8 +29,7 @@ Or, if you want to try the additional tests command, run on the terminal a comma
 bash run_tests.sh
 ```
 Note that 'input/input.txt' is just a location of a .txt file named 'input.txt' that comes within this repository. It can be used with any location and any .txt file. By running the command that way, the terminal show a line with two integers, one for the first presente show and the other one to the last present show, and so on until the "0 0" input shows on the .txt input file.
-In addition, the additional test cases include a 102M file, and, because of that, it cannot be uploaded to github. I'll add a link to a Google Drive to make its download available.
-[Link para download dos testes adicionais](https://drive.google.com/file/d/1mcS8qprrqAcg5z8LI2Q3MTSwR5htGRjF/view?usp=sharing)
+In addition, the additional test cases include a 102M file, and, because of that, it cannot be uploaded to github. The run_tests.sh file will download a compacted archive from Google Drive with those tests and handle it properly, in addiction to run the tests included in it.
 
 ## Cleaning compiled files
 Just run on the terminal:

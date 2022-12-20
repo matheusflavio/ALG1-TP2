@@ -7,23 +7,32 @@
 # The timeout is 30 seconds (about 3 seconds per case)
 
 # clean the output files
-rm -f trivial_input.txt.out small_input.txt.out medium_input.txt.out big_input.txt.out
+if test -d "test_files"; then
+    echo "Download not needed"
+else
+    wget "https://drive.google.com/u/1/uc?id=1mcS8qprrqAcg5z8LI2Q3MTSwR5htGRjF&export=download" -O tests.7z
+    7z x tests.7z -y
+fi
+
+if test -f "compactGameFiles.sh"; then
+    rm compactGameFiles.sh
+fi
+
+if test -f "tests.7z"; then
+    rm tests.7z
+fi
+
+echo "Starting tests..."
 
 for i in trivial_input.txt small_input.txt medium_input.txt big_input.txt
 do
     echo -n "Running test $i ... "
 
-    timeout 30 ./tp02 < test_files/$i > $i.out
-    if [ $? -eq 124 ]
+    diff -q <(./tp02 < test_files/$i) test_files/${i/input/output}
+    if [ $? -eq 0 ]
     then
-        echo "---> Timeout"
+        echo "---> Passed!"
     else
-        diff -q $i.out test_files/${i/input/output}
-        if [ $? -eq 0 ]
-        then
-            echo "---> Passed!"
-        else
-            echo "---> Failed :/"
-        fi
+        echo "---> Failed :/"
     fi
 done
